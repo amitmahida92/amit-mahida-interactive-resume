@@ -6,18 +6,25 @@ import {
   ChevronRight,
   Cloud,
   Code2,
+  Container,
   Database,
   Download,
   Gauge,
+  GitBranch,
+  KeyRound,
   Layers3,
   Linkedin,
   Mail,
   MapPin,
   Phone,
+  RadioTower,
   Rocket,
+  ServerCog,
+  ShieldCheck,
+  TestTube2,
   Workflow,
 } from "lucide-react";
-import { education, experience, metrics, profile, showcase, skillGroups } from "./resumeData";
+import { education, experience, metrics, platformFlow, profile, showcase, skillGroups } from "./resumeData";
 
 const navItems = [
   { label: "Impact", href: "#impact" },
@@ -29,7 +36,47 @@ const navItems = [
 const emailHref = `mailto:${profile.email}`;
 
 const showcaseIcons = [Layers3, Workflow, Gauge, BrainCircuit];
-const skillIcons = [Code2, Database, Cloud, Boxes, Rocket, BrainCircuit];
+const skillIcons = [Code2, ServerCog, Cloud, Database, Boxes, ShieldCheck, TestTube2, Rocket, BrainCircuit];
+const flowIcons = {
+  client: Code2,
+  edge: Cloud,
+  contracts: Workflow,
+  services: ServerCog,
+  infra: Container,
+  async: RadioTower,
+  security: KeyRound,
+  quality: GitBranch,
+};
+
+const logoShortLabels = {
+  aws: "AWS",
+  grpc: "gRPC",
+  rest: "REST",
+  graphql: "GQL",
+  java: "J",
+  node: "JS",
+  mongo: "MDB",
+  postgres: "PG",
+  mysql: "SQL",
+  firebase: "Fb",
+  supabase: "Sb",
+  dynamo: "DDB",
+  k8s: "K8s",
+  docker: "D",
+  kafka: "K",
+  oauth: "OA",
+  auth0: "A0",
+  keycloak: "KC",
+  vault: "V",
+  jenkins: "J",
+  github: "GH",
+  jest: "Jest",
+  karma: "K",
+  jasmine: "Js",
+  cypress: "Cy",
+  junit: "JU",
+  mockito: "Mo",
+};
 
 function useReveal() {
   useEffect(() => {
@@ -93,6 +140,78 @@ function CountUp({ value, suffix = "" }) {
   );
 }
 
+function TechLogo({ logo, name }) {
+  if (logo === "angular") {
+    return (
+      <svg className="tech-logo-svg angular-logo" viewBox="0 0 32 32" aria-hidden="true">
+        <path d="M16 2 4 6.4l1.9 16.2L16 30l10.1-7.4L28 6.4 16 2Z" />
+        <path d="M16 5.4 8.1 23.1h3.2l1.6-3.8h6.2l1.6 3.8h3.2L16 5.4Zm0 6.4 2.1 5h-4.2l2.1-5Z" />
+      </svg>
+    );
+  }
+
+  if (logo === "react") {
+    return (
+      <svg className="tech-logo-svg react-logo" viewBox="0 0 32 32" aria-hidden="true">
+        <ellipse cx="16" cy="16" rx="12" ry="4.8" />
+        <ellipse cx="16" cy="16" rx="12" ry="4.8" transform="rotate(60 16 16)" />
+        <ellipse cx="16" cy="16" rx="12" ry="4.8" transform="rotate(120 16 16)" />
+        <circle cx="16" cy="16" r="2.6" />
+      </svg>
+    );
+  }
+
+  return (
+    <span className={`tech-logo-fallback logo-${logo}`} aria-hidden="true">
+      {logoShortLabels[logo] ?? name.slice(0, 2)}
+    </span>
+  );
+}
+
+function PlatformFlow() {
+  const repeatedFlow = [...platformFlow, ...platformFlow];
+
+  return (
+    <div className="platform-flow reveal is-visible" aria-label="Highly scalable platform technology sequence">
+      <div className="platform-flow-header">
+        <span>Highly scalable platform sequence</span>
+        <strong>Angular/React - Edge - APIs - Services - Events - Identity - CI/CD</strong>
+      </div>
+      <div className="platform-flow-window">
+        <div className="platform-flow-track">
+          {repeatedFlow.map((stage, index) => {
+            const Icon = flowIcons[stage.key] ?? Layers3;
+            const isDuplicate = index >= platformFlow.length;
+
+            return (
+              <article
+                className={`flow-stage flow-${stage.accent}`}
+                key={`${stage.key}-${index}`}
+                aria-hidden={isDuplicate}
+              >
+                <div className="flow-stage-title">
+                  <span className="flow-stage-icon">
+                    <Icon size={16} />
+                  </span>
+                  <span>{stage.stage}</span>
+                </div>
+                <div className="flow-tech-list">
+                  {stage.technologies.map((tech) => (
+                    <span className={`flow-tech logo-${tech.logo}`} key={`${stage.key}-${tech.name}`}>
+                      <TechLogo logo={tech.logo} name={tech.name} />
+                      <span>{tech.name}</span>
+                    </span>
+                  ))}
+                </div>
+              </article>
+            );
+          })}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function ArchitectureCanvas() {
   const canvasRef = useRef(null);
 
@@ -107,21 +226,29 @@ function ArchitectureCanvas() {
     let height = 0;
     let pointer = { x: 0.72, y: 0.32 };
     const nodes = [
-      { x: 0.16, y: 0.28, r: 7, label: "UI" },
-      { x: 0.32, y: 0.58, r: 10, label: "Nx" },
-      { x: 0.48, y: 0.34, r: 8, label: "API" },
-      { x: 0.64, y: 0.62, r: 9, label: "AWS" },
-      { x: 0.82, y: 0.42, r: 7, label: "Data" },
-      { x: 0.73, y: 0.22, r: 6, label: "AI" },
+      { x: 0.09, y: 0.28, r: 13, label: "Angular", logo: "angular", color: "#dd0031" },
+      { x: 0.09, y: 0.5, r: 13, label: "React", logo: "react", color: "#61dafb" },
+      { x: 0.22, y: 0.39, r: 10, label: "S3 / CDN", short: "AWS", color: "#ff9900" },
+      { x: 0.35, y: 0.39, r: 10, label: "gRPC REST GraphQL", short: "API", color: "#ff6b4a" },
+      { x: 0.49, y: 0.28, r: 10, label: "Java / Node.js", short: "JS", color: "#35d6a4" },
+      { x: 0.49, y: 0.52, r: 10, label: "Mongo Postgres MySQL", short: "DB", color: "#2d7dd2" },
+      { x: 0.63, y: 0.39, r: 10, label: "K8s + Docker", short: "K8s", color: "#7967ed" },
+      { x: 0.77, y: 0.28, r: 10, label: "Kafka SNS SQS", short: "Q", color: "#f2b233" },
+      { x: 0.77, y: 0.52, r: 10, label: "OAuth Auth0 Vault", short: "ID", color: "#b88cff" },
+      { x: 0.91, y: 0.39, r: 10, label: "CI/CD + Tests", short: "CI", color: "#35d6a4" },
     ];
     const links = [
-      [0, 1],
+      [0, 2],
       [1, 2],
       [2, 3],
       [3, 4],
-      [2, 5],
-      [5, 4],
-      [1, 3],
+      [3, 5],
+      [4, 6],
+      [5, 6],
+      [6, 7],
+      [6, 8],
+      [7, 9],
+      [8, 9],
     ];
 
     const resize = () => {
@@ -140,6 +267,66 @@ function ArchitectureCanvas() {
         x: (event.clientX - rect.left) / rect.width,
         y: (event.clientY - rect.top) / rect.height,
       };
+    };
+
+    const drawLogoNode = (node, x, y, time, index) => {
+      const active = 0.5 + Math.sin(time / 600 + index) * 0.5;
+
+      context.beginPath();
+      context.arc(x, y, node.r + 20 + active * 6, 0, Math.PI * 2);
+      context.fillStyle = `${node.color}24`;
+      context.fill();
+
+      if (node.logo === "angular") {
+        const shield = node.r + 8;
+        context.beginPath();
+        context.moveTo(x, y - shield);
+        context.lineTo(x + shield * 0.82, y - shield * 0.58);
+        context.lineTo(x + shield * 0.66, y + shield * 0.62);
+        context.lineTo(x, y + shield);
+        context.lineTo(x - shield * 0.66, y + shield * 0.62);
+        context.lineTo(x - shield * 0.82, y - shield * 0.58);
+        context.closePath();
+        context.fillStyle = "#dd0031";
+        context.fill();
+        context.fillStyle = "#ffffff";
+        context.font = "900 16px Inter, Arial, sans-serif";
+        context.textAlign = "center";
+        context.textBaseline = "middle";
+        context.fillText("A", x, y + 1);
+        return;
+      }
+
+      if (node.logo === "react") {
+        context.save();
+        context.translate(x, y);
+        context.strokeStyle = "#61dafb";
+        context.lineWidth = 1.5;
+        [0, Math.PI / 3, (Math.PI * 2) / 3].forEach((rotation) => {
+          context.rotate(rotation);
+          context.beginPath();
+          context.ellipse(0, 0, node.r + 8, node.r * 0.52, 0, 0, Math.PI * 2);
+          context.stroke();
+          context.rotate(-rotation);
+        });
+        context.beginPath();
+        context.arc(0, 0, 3, 0, Math.PI * 2);
+        context.fillStyle = "#61dafb";
+        context.fill();
+        context.restore();
+        return;
+      }
+
+      context.beginPath();
+      context.arc(x, y, node.r + 6, 0, Math.PI * 2);
+      context.fillStyle = "#fbfbf6";
+      context.fill();
+
+      context.font = node.short.length > 2 ? "700 8px Inter, Arial, sans-serif" : "800 10px Inter, Arial, sans-serif";
+      context.textAlign = "center";
+      context.textBaseline = "middle";
+      context.fillStyle = node.color;
+      context.fillText(node.short, x, y + 0.5);
     };
 
     const draw = (time = 0) => {
@@ -185,37 +372,28 @@ function ArchitectureCanvas() {
         context.beginPath();
         context.moveTo(x1, y1);
         context.lineTo(x2, y2);
-        context.strokeStyle = `rgba(255, 255, 255, ${0.16 + pulse * 0.16})`;
-        context.lineWidth = 1;
+        context.strokeStyle = `rgba(255, 255, 255, ${0.18 + pulse * 0.18})`;
+        context.lineWidth = 1.1;
         context.stroke();
 
         const movingX = x1 + (x2 - x1) * pulse;
         const movingY = y1 + (y2 - y1) * pulse;
         context.beginPath();
-        context.arc(movingX, movingY, 2.8, 0, Math.PI * 2);
-        context.fillStyle = index % 2 ? "#ff7a59" : "#35d6a4";
+        context.arc(movingX, movingY, 3.1, 0, Math.PI * 2);
+        context.fillStyle = nodes[b].color;
         context.fill();
       });
 
       nodes.forEach((node, index) => {
         const x = node.x * width + Math.sin(time / 900 + index) * 5;
         const y = node.y * height + Math.cos(time / 1000 + index) * 5;
-        const active = 0.5 + Math.sin(time / 600 + index) * 0.5;
+        drawLogoNode(node, x, y, time, index);
 
-        context.beginPath();
-        context.arc(x, y, node.r + 17 + active * 5, 0, Math.PI * 2);
-        context.fillStyle = index % 3 === 0 ? "rgba(53, 214, 164, 0.12)" : "rgba(255, 122, 89, 0.11)";
-        context.fill();
-
-        context.beginPath();
-        context.arc(x, y, node.r, 0, Math.PI * 2);
-        context.fillStyle = "#fbfbf6";
-        context.fill();
-
-        context.font = "600 11px Inter, Arial, sans-serif";
+        context.font = "700 10px Inter, Arial, sans-serif";
         context.textAlign = "center";
-        context.fillStyle = "rgba(255, 255, 255, 0.78)";
-        context.fillText(node.label, x, y + 29);
+        context.textBaseline = "alphabetic";
+        context.fillStyle = "rgba(255, 255, 255, 0.72)";
+        context.fillText(node.label, x, y + 33);
       });
 
       if (!reducedMotion) {
@@ -276,6 +454,8 @@ function Hero() {
         <h1>{profile.name}</h1>
         <p className="hero-role">{profile.role}</p>
         <p className="hero-copy">{profile.summary}</p>
+
+        <PlatformFlow />
 
         <div className="hero-actions" aria-label="Primary actions">
           <a className="button primary" href={profile.pdf} download>
