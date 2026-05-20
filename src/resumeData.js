@@ -7,6 +7,7 @@ export const profile = {
   linkedin: "https://www.linkedin.com/in/amit-mahida",
   portfolio: "https://bold.pro/my/amit-mahida-250107142551/213r",
   pdf: `${import.meta.env.BASE_URL}Amit_Mahida_FE_Architect.pdf`,
+  image: `${import.meta.env.BASE_URL}amit-mahida-profile.jpeg`,
   summary:
     "Frontend architecture leader with deep React, Angular, Node.js, Java, AWS, and data-heavy product experience. I build scalable SaaS interfaces, schema-driven builders, and high-performing teams that ship dependable product platforms.",
   stack: [

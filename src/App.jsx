@@ -307,15 +307,25 @@ function Hero() {
         </div>
       </div>
 
-      <div className="hero-stats" aria-label="Career highlights">
-        {metrics.map((metric, index) => (
-          <article className="hero-stat reveal is-visible" key={metric.label} style={{ "--delay": `${index * 80}ms` }}>
-            <strong>
-              <CountUp value={metric.value} suffix={metric.suffix} />
-            </strong>
-            <span>{metric.label}</span>
-          </article>
-        ))}
+      <div className="hero-side reveal is-visible">
+        <figure className="hero-portrait" aria-label="Portrait of Amit Mahida">
+          <img src={profile.image} alt="Amit Mahida" />
+          <figcaption>
+            <span>Frontend Architect</span>
+            <strong>12+ years building SaaS products</strong>
+          </figcaption>
+        </figure>
+
+        <div className="hero-stats" aria-label="Career highlights">
+          {metrics.map((metric, index) => (
+            <article className="hero-stat reveal is-visible" key={metric.label} style={{ "--delay": `${index * 80}ms` }}>
+              <strong>
+                <CountUp value={metric.value} suffix={metric.suffix} />
+              </strong>
+              <span>{metric.label}</span>
+            </article>
+          ))}
+        </div>
       </div>
     </section>
   );
