@@ -359,7 +359,7 @@ button {
   gap: 10px;
   width: max-content;
   padding: 12px;
-  animation: platformDrift 46s linear infinite;
+  animation: platformDrift 58s linear infinite;
 }
 
 .platform-flow:hover .platform-flow-track {
@@ -406,6 +406,14 @@ button {
   --flow-accent: #61dafb;
 }
 
+.flow-state {
+  --flow-accent: #f2b233;
+}
+
+.flow-ui {
+  --flow-accent: #7967ed;
+}
+
 .flow-edge {
   --flow-accent: #ff9900;
 }
@@ -436,7 +444,12 @@ button {
 
 .flow-services,
 .flow-quality {
-  flex-basis: 430px;
+  flex-basis: 460px;
+}
+
+.flow-state,
+.flow-ui {
+  flex-basis: 360px;
 }
 
 .flow-security {

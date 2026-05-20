@@ -27,6 +27,13 @@ export const profile = {
     "Kafka",
     "Nx",
     "NgRx",
+    "PWA",
+    "Ionic",
+    "Material UI",
+    "PrimeNG",
+    "Bootstrap",
+    "IndexedDB",
+    "Redis",
     "MongoDB",
     "PostgreSQL",
     "DynamoDB",
@@ -45,6 +52,32 @@ export const platformFlow = [
     technologies: [
       { name: "Angular", logo: "angular" },
       { name: "React", logo: "react" },
+      { name: "Ionic", logo: "ionic" },
+      { name: "PWA", logo: "pwa" },
+    ],
+  },
+  {
+    key: "state",
+    stage: "State & Caching",
+    summary: "Offline-ready client storage plus server-side cache acceleration",
+    accent: "state",
+    technologies: [
+      { name: "IndexedDB", logo: "indexeddb" },
+      { name: "localStorage", logo: "localstorage" },
+      { name: "sessionStorage", logo: "sessionstorage" },
+      { name: "Redis", logo: "redis" },
+    ],
+  },
+  {
+    key: "ui",
+    stage: "Mobile & UI System",
+    summary: "Mobile-first controls and rich web component systems",
+    accent: "ui",
+    technologies: [
+      { name: "Ionic", logo: "ionic" },
+      { name: "Material UI", logo: "mui" },
+      { name: "PrimeNG", logo: "primeng" },
+      { name: "Bootstrap", logo: "bootstrap" },
     ],
   },
   {
@@ -77,6 +110,7 @@ export const platformFlow = [
     technologies: [
       { name: "Java", logo: "java" },
       { name: "Node.js", logo: "node" },
+      { name: "Redis", logo: "redis" },
       { name: "MongoDB", logo: "mongo" },
       { name: "Postgres", logo: "postgres" },
       { name: "MySQL", logo: "mysql" },
@@ -318,6 +352,10 @@ export const skillGroups = [
       "Nx Monorepo",
       "NgRx",
       "Ionic",
+      "PWA",
+      "IndexedDB",
+      "localStorage",
+      "sessionStorage",
       "JavaScript",
       "TypeScript",
       "Next.js",
@@ -325,7 +363,8 @@ export const skillGroups = [
       "CSS3",
       "Tailwind",
       "Material UI",
-      "Bootstrap UI",
+      "PrimeNG",
+      "Bootstrap",
       "Responsive Web Design",
       "UX Design",
     ],
@@ -340,6 +379,7 @@ export const skillGroups = [
       "Spring Boot",
       "Tomcat",
       "Nginx",
+      "Redis",
       "REST APIs",
       "gRPC",
       "GraphQL",
@@ -354,6 +394,10 @@ export const skillGroups = [
   {
     name: "Data",
     skills: ["MongoDB", "PostgreSQL", "MySQL", "Firebase", "Supabase", "DynamoDB", "MEAN Stack", "MERN Stack"],
+  },
+  {
+    name: "Caching & State",
+    skills: ["Redis", "IndexedDB", "localStorage", "sessionStorage", "NgRx", "PWA", "Service Workers"],
   },
   {
     name: "Platform Infra",
@@ -396,7 +440,7 @@ export const skillGroups = [
   },
   {
     name: "AI & Delivery",
-    skills: ["ChatGPT Integration", "Copilot", "CodeRabbit", "Jira", "Confluence", "Git"],
+    skills: ["ChatGPT Integration", "Claude Code", "Codex", "Replit", "Copilot", "CodeRabbit", "Jira", "Confluence", "Git"],
   },
 ];
 

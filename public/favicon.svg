@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Amit Mahida">
+  <defs>
+    <linearGradient id="mark" x1="16" x2="112" y1="16" y2="112" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#f2b233" />
+      <stop offset="0.52" stop-color="#fff0a1" />
+      <stop offset="1" stop-color="#22b889" />
+    </linearGradient>
+  </defs>
+  <rect width="128" height="128" rx="22" fill="#16140f" />
+  <rect x="12" y="12" width="104" height="104" rx="18" fill="url(#mark)" />
+  <path
+    fill="#141313"
+    d="M33.8 88 50.6 40h11.2l16.8 48H67.4l-3.2-10.2H48.1L44.9 88H33.8Zm16.9-18.9h11l-5.5-17.6-5.5 17.6ZM82.4 88V40h10.5v48H82.4Z"
+  />
+</svg>

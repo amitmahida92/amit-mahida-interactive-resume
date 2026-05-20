@@ -1,0 +1,39 @@
+{
+  "name": "Amit Mahida Interactive Resume",
+  "short_name": "Amit Resume",
+  "description": "Interactive resume for Amit Mahida, Frontend Architect and Full-Stack Developer.",
+  "id": ".",
+  "start_url": ".",
+  "scope": ".",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#10100e",
+  "theme_color": "#16140f",
+  "categories": ["business", "productivity"],
+  "icons": [
+    {
+      "src": "pwa-icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "pwa-icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Tech Stack",
+      "url": "#skills",
+      "description": "Open the capability map."
+    },
+    {
+      "name": "Resume PDF",
+      "url": "Amit_Mahida_FE_Architect.pdf",
+      "description": "Open the printable resume PDF."
+    }
+  ]
+}

@@ -11,6 +11,7 @@ import {
   Download,
   Gauge,
   GitBranch,
+  HardDrive,
   KeyRound,
   Layers3,
   Linkedin,
@@ -21,6 +22,7 @@ import {
   Rocket,
   ServerCog,
   ShieldCheck,
+  Smartphone,
   TestTube2,
   Workflow,
 } from "lucide-react";
@@ -37,9 +39,11 @@ const navItems = [
 const emailHref = `mailto:${profile.email}`;
 
 const showcaseIcons = [Layers3, Workflow, Gauge, BrainCircuit];
-const skillIcons = [Code2, ServerCog, Cloud, Database, Boxes, ShieldCheck, TestTube2, Rocket, BrainCircuit];
+const skillIcons = [Code2, ServerCog, Cloud, Database, HardDrive, Boxes, ShieldCheck, TestTube2, Rocket, BrainCircuit];
 const flowIcons = {
   client: Code2,
+  state: HardDrive,
+  ui: Smartphone,
   edge: Cloud,
   contracts: Workflow,
   services: ServerCog,
@@ -148,7 +152,7 @@ function PlatformFlow() {
     <div className="platform-flow reveal is-visible" aria-label="Highly scalable platform technology sequence">
       <div className="platform-flow-header">
         <span>Highly scalable platform sequence</span>
-        <strong>Angular/React - Edge - APIs - Services - Events - Identity - CI/CD</strong>
+        <strong>Client - State/PWA - UI - Edge - APIs - Services - Events - Identity - CI/CD</strong>
       </div>
       <div className="platform-flow-window">
         <div className="platform-flow-track">
@@ -196,29 +200,31 @@ function ArchitectureCanvas() {
     let height = 0;
     let pointer = { x: 0.72, y: 0.32 };
     const nodes = [
-      { x: 0.09, y: 0.28, r: 13, label: "Angular", logos: ["angular"], short: "A", color: "#dd0031" },
-      { x: 0.09, y: 0.5, r: 13, label: "React", logos: ["react"], short: "R", color: "#61dafb" },
-      { x: 0.22, y: 0.39, r: 11, label: "S3 / CDN", logos: ["s3", "cloudfront", "amplify"], short: "AWS", color: "#ff9900" },
-      { x: 0.35, y: 0.39, r: 11, label: "gRPC REST GraphQL", logos: ["grpc", "rest", "graphql"], short: "API", color: "#ff6b4a" },
-      { x: 0.49, y: 0.28, r: 11, label: "Java / Node.js", logos: ["java", "node"], short: "JS", color: "#35d6a4" },
-      { x: 0.49, y: 0.52, r: 11, label: "Mongo Postgres MySQL", logos: ["mongo", "postgres", "mysql"], short: "DB", color: "#2d7dd2" },
-      { x: 0.63, y: 0.39, r: 11, label: "K8s + Docker", logos: ["kubernetes", "docker"], short: "K8s", color: "#7967ed" },
-      { x: 0.77, y: 0.28, r: 11, label: "Kafka SNS SQS", logos: ["kafka", "sns", "sqs"], short: "Q", color: "#f2b233" },
-      { x: 0.77, y: 0.52, r: 11, label: "OAuth Auth0 Vault", logos: ["oauth", "auth0", "vault"], short: "ID", color: "#b88cff" },
-      { x: 0.91, y: 0.39, r: 11, label: "CI/CD + Tests", logos: ["jenkins", "githubactions", "jest"], short: "CI", color: "#35d6a4" },
+      { x: 0.07, y: 0.28, r: 12, label: "Angular React Ionic", logos: ["angular", "react", "ionic"], short: "FE", color: "#61dafb" },
+      { x: 0.07, y: 0.52, r: 12, label: "MUI PrimeNG Bootstrap", logos: ["mui", "primeng", "bootstrap"], short: "UI", color: "#7967ed" },
+      { x: 0.2, y: 0.39, r: 11, label: "PWA IndexedDB Storage", logos: ["pwa", "indexeddb", "localstorage"], short: "PWA", color: "#f2b233" },
+      { x: 0.32, y: 0.39, r: 11, label: "S3 / CDN", logos: ["s3", "cloudfront", "amplify"], short: "AWS", color: "#ff9900" },
+      { x: 0.44, y: 0.39, r: 11, label: "gRPC REST GraphQL", logos: ["grpc", "rest", "graphql"], short: "API", color: "#ff6b4a" },
+      { x: 0.57, y: 0.28, r: 11, label: "Java Node Redis", logos: ["java", "node", "redis"], short: "API", color: "#35d6a4" },
+      { x: 0.57, y: 0.52, r: 11, label: "Mongo Postgres MySQL", logos: ["mongo", "postgres", "mysql"], short: "DB", color: "#2d7dd2" },
+      { x: 0.7, y: 0.39, r: 11, label: "K8s + Docker", logos: ["kubernetes", "docker"], short: "K8s", color: "#7967ed" },
+      { x: 0.82, y: 0.28, r: 11, label: "Kafka SNS SQS", logos: ["kafka", "sns", "sqs"], short: "Q", color: "#f2b233" },
+      { x: 0.82, y: 0.52, r: 11, label: "OAuth Auth0 Vault", logos: ["oauth", "auth0", "vault"], short: "ID", color: "#b88cff" },
+      { x: 0.94, y: 0.39, r: 11, label: "CI/CD + AI Tools", logos: ["jenkins", "githubactions", "claude"], short: "CI", color: "#35d6a4" },
     ];
     const links = [
       [0, 2],
       [1, 2],
       [2, 3],
       [3, 4],
-      [3, 5],
+      [4, 5],
       [4, 6],
-      [5, 6],
+      [5, 7],
       [6, 7],
-      [6, 8],
+      [7, 8],
       [7, 9],
-      [8, 9],
+      [8, 10],
+      [9, 10],
     ];
 
     const resize = () => {
