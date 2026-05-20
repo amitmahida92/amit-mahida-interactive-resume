@@ -25,6 +25,7 @@ import {
   Workflow,
 } from "lucide-react";
 import { education, experience, metrics, platformFlow, profile, showcase, skillGroups } from "./resumeData";
+import { getTechFallback, resolveTechLogo } from "./techLogos";
 
 const navItems = [
   { label: "Impact", href: "#impact" },
@@ -46,36 +47,6 @@ const flowIcons = {
   async: RadioTower,
   security: KeyRound,
   quality: GitBranch,
-};
-
-const logoShortLabels = {
-  aws: "AWS",
-  grpc: "gRPC",
-  rest: "REST",
-  graphql: "GQL",
-  java: "J",
-  node: "JS",
-  mongo: "MDB",
-  postgres: "PG",
-  mysql: "SQL",
-  firebase: "Fb",
-  supabase: "Sb",
-  dynamo: "DDB",
-  k8s: "K8s",
-  docker: "D",
-  kafka: "K",
-  oauth: "OA",
-  auth0: "A0",
-  keycloak: "KC",
-  vault: "V",
-  jenkins: "J",
-  github: "GH",
-  jest: "Jest",
-  karma: "K",
-  jasmine: "Js",
-  cypress: "Cy",
-  junit: "JU",
-  mockito: "Mo",
 };
 
 function useReveal() {
@@ -141,29 +112,31 @@ function CountUp({ value, suffix = "" }) {
 }
 
 function TechLogo({ logo, name }) {
-  if (logo === "angular") {
-    return (
-      <svg className="tech-logo-svg angular-logo" viewBox="0 0 32 32" aria-hidden="true">
-        <path d="M16 2 4 6.4l1.9 16.2L16 30l10.1-7.4L28 6.4 16 2Z" />
-        <path d="M16 5.4 8.1 23.1h3.2l1.6-3.8h6.2l1.6 3.8h3.2L16 5.4Zm0 6.4 2.1 5h-4.2l2.1-5Z" />
-      </svg>
-    );
-  }
+  const resolved = resolveTechLogo(logo ?? name);
+  const fallback = resolved?.fallback ?? getTechFallback(name);
 
-  if (logo === "react") {
-    return (
-      <svg className="tech-logo-svg react-logo" viewBox="0 0 32 32" aria-hidden="true">
-        <ellipse cx="16" cy="16" rx="12" ry="4.8" />
-        <ellipse cx="16" cy="16" rx="12" ry="4.8" transform="rotate(60 16 16)" />
-        <ellipse cx="16" cy="16" rx="12" ry="4.8" transform="rotate(120 16 16)" />
-        <circle cx="16" cy="16" r="2.6" />
-      </svg>
-    );
-  }
+  const handleLogoError = (event) => {
+    event.currentTarget.hidden = true;
+    event.currentTarget.nextElementSibling?.classList.remove("is-hidden");
+    event.currentTarget.parentElement?.classList.add("logo-missing");
+  };
 
   return (
-    <span className={`tech-logo-fallback logo-${logo}`} aria-hidden="true">
-      {logoShortLabels[logo] ?? name.slice(0, 2)}
+    <span className="tech-logo" aria-hidden="true" title={resolved?.title ?? name}>
+      {resolved?.src ? <img className="tech-logo-img" src={resolved.src} alt="" onError={handleLogoError} /> : null}
+      <span className={`tech-logo-fallback ${resolved?.src ? "is-hidden" : ""}`}>{fallback}</span>
+    </span>
+  );
+}
+
+function TechChip({ label, logoKey, className = "", style }) {
+  const resolved = resolveTechLogo(logoKey ?? label);
+  const logoClass = resolved?.key ? `logo-${resolved.key}` : "logo-generic";
+
+  return (
+    <span className={`tech-chip ${logoClass} ${className}`.trim()} style={style}>
+      <TechLogo logo={logoKey} name={label} />
+      <span className="tech-chip-label">{label}</span>
     </span>
   );
 }
@@ -197,10 +170,7 @@ function PlatformFlow() {
                 </div>
                 <div className="flow-tech-list">
                   {stage.technologies.map((tech) => (
-                    <span className={`flow-tech logo-${tech.logo}`} key={`${stage.key}-${tech.name}`}>
-                      <TechLogo logo={tech.logo} name={tech.name} />
-                      <span>{tech.name}</span>
-                    </span>
+                    <TechChip className="flow-tech" key={`${stage.key}-${tech.name}`} label={tech.name} logoKey={tech.logo} />
                   ))}
                 </div>
               </article>
@@ -226,16 +196,16 @@ function ArchitectureCanvas() {
     let height = 0;
     let pointer = { x: 0.72, y: 0.32 };
     const nodes = [
-      { x: 0.09, y: 0.28, r: 13, label: "Angular", logo: "angular", color: "#dd0031" },
-      { x: 0.09, y: 0.5, r: 13, label: "React", logo: "react", color: "#61dafb" },
-      { x: 0.22, y: 0.39, r: 10, label: "S3 / CDN", short: "AWS", color: "#ff9900" },
-      { x: 0.35, y: 0.39, r: 10, label: "gRPC REST GraphQL", short: "API", color: "#ff6b4a" },
-      { x: 0.49, y: 0.28, r: 10, label: "Java / Node.js", short: "JS", color: "#35d6a4" },
-      { x: 0.49, y: 0.52, r: 10, label: "Mongo Postgres MySQL", short: "DB", color: "#2d7dd2" },
-      { x: 0.63, y: 0.39, r: 10, label: "K8s + Docker", short: "K8s", color: "#7967ed" },
-      { x: 0.77, y: 0.28, r: 10, label: "Kafka SNS SQS", short: "Q", color: "#f2b233" },
-      { x: 0.77, y: 0.52, r: 10, label: "OAuth Auth0 Vault", short: "ID", color: "#b88cff" },
-      { x: 0.91, y: 0.39, r: 10, label: "CI/CD + Tests", short: "CI", color: "#35d6a4" },
+      { x: 0.09, y: 0.28, r: 13, label: "Angular", logos: ["angular"], short: "A", color: "#dd0031" },
+      { x: 0.09, y: 0.5, r: 13, label: "React", logos: ["react"], short: "R", color: "#61dafb" },
+      { x: 0.22, y: 0.39, r: 11, label: "S3 / CDN", logos: ["s3", "cloudfront", "amplify"], short: "AWS", color: "#ff9900" },
+      { x: 0.35, y: 0.39, r: 11, label: "gRPC REST GraphQL", logos: ["grpc", "rest", "graphql"], short: "API", color: "#ff6b4a" },
+      { x: 0.49, y: 0.28, r: 11, label: "Java / Node.js", logos: ["java", "node"], short: "JS", color: "#35d6a4" },
+      { x: 0.49, y: 0.52, r: 11, label: "Mongo Postgres MySQL", logos: ["mongo", "postgres", "mysql"], short: "DB", color: "#2d7dd2" },
+      { x: 0.63, y: 0.39, r: 11, label: "K8s + Docker", logos: ["kubernetes", "docker"], short: "K8s", color: "#7967ed" },
+      { x: 0.77, y: 0.28, r: 11, label: "Kafka SNS SQS", logos: ["kafka", "sns", "sqs"], short: "Q", color: "#f2b233" },
+      { x: 0.77, y: 0.52, r: 11, label: "OAuth Auth0 Vault", logos: ["oauth", "auth0", "vault"], short: "ID", color: "#b88cff" },
+      { x: 0.91, y: 0.39, r: 11, label: "CI/CD + Tests", logos: ["jenkins", "githubactions", "jest"], short: "CI", color: "#35d6a4" },
     ];
     const links = [
       [0, 2],
@@ -269,64 +239,70 @@ function ArchitectureCanvas() {
       };
     };
 
+    const logoImages = new Map();
+
+    nodes
+      .flatMap((node) => node.logos ?? [])
+      .forEach((logoKey) => {
+        if (logoImages.has(logoKey)) return;
+        const logo = resolveTechLogo(logoKey);
+        if (!logo?.src) return;
+
+        const image = new Image();
+        image.onload = () => draw();
+        image.src = logo.src;
+        logoImages.set(logoKey, image);
+      });
+
+    const drawRoundRect = (x, y, width, height, radius) => {
+      if (context.roundRect) {
+        context.roundRect(x, y, width, height, radius);
+        return;
+      }
+
+      context.moveTo(x + radius, y);
+      context.arcTo(x + width, y, x + width, y + height, radius);
+      context.arcTo(x + width, y + height, x, y + height, radius);
+      context.arcTo(x, y + height, x, y, radius);
+      context.arcTo(x, y, x + width, y, radius);
+    };
+
     const drawLogoNode = (node, x, y, time, index) => {
       const active = 0.5 + Math.sin(time / 600 + index) * 0.5;
+      const nodeLogos = node.logos ?? [];
+      const loadedLogos = nodeLogos
+        .map((logoKey) => logoImages.get(logoKey))
+        .filter((image) => image?.complete && image.naturalWidth > 0);
 
       context.beginPath();
       context.arc(x, y, node.r + 20 + active * 6, 0, Math.PI * 2);
       context.fillStyle = `${node.color}24`;
       context.fill();
 
-      if (node.logo === "angular") {
-        const shield = node.r + 8;
-        context.beginPath();
-        context.moveTo(x, y - shield);
-        context.lineTo(x + shield * 0.82, y - shield * 0.58);
-        context.lineTo(x + shield * 0.66, y + shield * 0.62);
-        context.lineTo(x, y + shield);
-        context.lineTo(x - shield * 0.66, y + shield * 0.62);
-        context.lineTo(x - shield * 0.82, y - shield * 0.58);
-        context.closePath();
-        context.fillStyle = "#dd0031";
-        context.fill();
-        context.fillStyle = "#ffffff";
-        context.font = "900 16px Inter, Arial, sans-serif";
-        context.textAlign = "center";
-        context.textBaseline = "middle";
-        context.fillText("A", x, y + 1);
-        return;
-      }
-
-      if (node.logo === "react") {
-        context.save();
-        context.translate(x, y);
-        context.strokeStyle = "#61dafb";
-        context.lineWidth = 1.5;
-        [0, Math.PI / 3, (Math.PI * 2) / 3].forEach((rotation) => {
-          context.rotate(rotation);
-          context.beginPath();
-          context.ellipse(0, 0, node.r + 8, node.r * 0.52, 0, 0, Math.PI * 2);
-          context.stroke();
-          context.rotate(-rotation);
-        });
-        context.beginPath();
-        context.arc(0, 0, 3, 0, Math.PI * 2);
-        context.fillStyle = "#61dafb";
-        context.fill();
-        context.restore();
-        return;
-      }
+      const multiple = loadedLogos.length > 1;
+      const panelWidth = multiple ? Math.min(64, 18 * loadedLogos.length + 12) : node.r * 2 + 18;
+      const panelHeight = multiple ? 30 : node.r * 2 + 18;
 
       context.beginPath();
-      context.arc(x, y, node.r + 6, 0, Math.PI * 2);
+      drawRoundRect(x - panelWidth / 2, y - panelHeight / 2, panelWidth, panelHeight, multiple ? 12 : 18);
       context.fillStyle = "#fbfbf6";
       context.fill();
 
-      context.font = node.short.length > 2 ? "700 8px Inter, Arial, sans-serif" : "800 10px Inter, Arial, sans-serif";
-      context.textAlign = "center";
-      context.textBaseline = "middle";
-      context.fillStyle = node.color;
-      context.fillText(node.short, x, y + 0.5);
+      if (loadedLogos.length) {
+        const iconSize = multiple ? 14 : node.r * 2 + 4;
+        const totalWidth = iconSize * loadedLogos.length + 4 * (loadedLogos.length - 1);
+        const startX = x - totalWidth / 2;
+
+        loadedLogos.forEach((image, logoIndex) => {
+          context.drawImage(image, startX + logoIndex * (iconSize + 4), y - iconSize / 2, iconSize, iconSize);
+        });
+      } else {
+        context.font = node.short.length > 2 ? "700 8px Inter, Arial, sans-serif" : "800 10px Inter, Arial, sans-serif";
+        context.textAlign = "center";
+        context.textBaseline = "middle";
+        context.fillStyle = node.color;
+        context.fillText(node.short, x, y + 0.5);
+      }
     };
 
     const draw = (time = 0) => {
@@ -564,7 +540,7 @@ function ArchitectureShowcase() {
               <p>{item.body}</p>
               <div className="tag-row">
                 {item.tags.map((tag) => (
-                  <span key={tag}>{tag}</span>
+                  <TechChip key={tag} label={tag} />
                 ))}
               </div>
             </article>
@@ -649,9 +625,7 @@ function Skills() {
 
         <div className="skill-cloud reveal" role="tabpanel" aria-label={`${active.name} skills`}>
           {active.skills.map((skill, index) => (
-            <span key={skill} style={{ "--delay": `${index * 35}ms` }}>
-              {skill}
-            </span>
+            <TechChip key={skill} label={skill} style={{ "--delay": `${index * 35}ms` }} />
           ))}
         </div>
       </div>

@@ -53,9 +53,9 @@ export const platformFlow = [
     summary: "Static delivery, CDN caching, preview branches",
     accent: "edge",
     technologies: [
-      { name: "S3", logo: "aws" },
-      { name: "CloudFront", logo: "aws" },
-      { name: "Amplify", logo: "aws" },
+      { name: "S3", logo: "s3" },
+      { name: "CloudFront", logo: "cloudfront" },
+      { name: "Amplify", logo: "amplify" },
     ],
   },
   {
@@ -102,8 +102,8 @@ export const platformFlow = [
     accent: "async",
     technologies: [
       { name: "Kafka", logo: "kafka" },
-      { name: "SNS", logo: "aws" },
-      { name: "SQS", logo: "aws" },
+      { name: "SNS", logo: "sns" },
+      { name: "SQS", logo: "sqs" },
     ],
   },
   {
@@ -125,7 +125,7 @@ export const platformFlow = [
     accent: "quality",
     technologies: [
       { name: "Jenkins", logo: "jenkins" },
-      { name: "GitHub Actions", logo: "github" },
+      { name: "GitHub Actions", logo: "githubactions" },
       { name: "Jest", logo: "jest" },
       { name: "Karma", logo: "karma" },
       { name: "Jasmine", logo: "jasmine" },

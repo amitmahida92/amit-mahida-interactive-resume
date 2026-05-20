@@ -172,7 +172,7 @@ button {
   inset: 0;
   width: 100%;
   height: 100%;
-  opacity: 0.92;
+  opacity: 0.76;
 }
 
 .hero-scrim {
@@ -180,7 +180,7 @@ button {
   inset: 0;
   pointer-events: none;
   background:
-    linear-gradient(90deg, rgba(8, 8, 7, 0.78), rgba(8, 8, 7, 0.3) 52%, rgba(8, 8, 7, 0.72)),
+    linear-gradient(90deg, rgba(8, 8, 7, 0.86), rgba(8, 8, 7, 0.34) 52%, rgba(8, 8, 7, 0.72)),
     linear-gradient(0deg, rgba(8, 8, 7, 0.9), transparent 42%);
 }
 
@@ -488,80 +488,54 @@ button {
   white-space: nowrap;
 }
 
-.tech-logo-svg,
-.tech-logo-fallback {
+.tech-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.tech-chip-label {
+  min-width: 0;
+}
+
+.tech-logo {
   flex: 0 0 auto;
-  width: 18px;
-  height: 18px;
+  display: grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  padding: 3px;
+  border: 1px solid rgba(17, 18, 16, 0.1);
+  border-radius: 7px;
+  background: rgba(255, 255, 255, 0.94);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
 }
 
-.tech-logo-svg {
+.tech-logo-img {
   display: block;
-}
-
-.angular-logo path:first-child {
-  fill: #dd0031;
-}
-
-.angular-logo path:last-child {
-  fill: #fffdf5;
-}
-
-.react-logo {
-  overflow: visible;
-}
-
-.react-logo ellipse {
-  fill: none;
-  stroke: #61dafb;
-  stroke-width: 1.45;
-}
-
-.react-logo circle {
-  fill: #61dafb;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
 .tech-logo-fallback {
   display: grid;
   place-items: center;
-  border-radius: 50%;
+  width: 100%;
+  height: 100%;
   color: #10100e;
-  background: var(--gold);
-  font-size: 0.48rem;
+  font-size: 0.45rem;
   font-weight: 950;
   letter-spacing: 0;
+  line-height: 1;
 }
 
-.flow-tech.logo-aws .tech-logo-fallback,
-.flow-tech.logo-firebase .tech-logo-fallback,
-.flow-tech.logo-jenkins .tech-logo-fallback,
-.flow-tech.logo-junit .tech-logo-fallback {
-  background: #ffbf4c;
+.tech-logo-fallback.is-hidden {
+  display: none;
 }
 
-.flow-tech.logo-graphql .tech-logo-fallback,
-.flow-tech.logo-auth0 .tech-logo-fallback,
-.flow-tech.logo-keycloak .tech-logo-fallback,
-.flow-tech.logo-vault .tech-logo-fallback {
-  color: #fffdf5;
-  background: #7967ed;
-}
-
-.flow-tech.logo-node .tech-logo-fallback,
-.flow-tech.logo-mongo .tech-logo-fallback,
-.flow-tech.logo-supabase .tech-logo-fallback,
-.flow-tech.logo-cypress .tech-logo-fallback,
-.flow-tech.logo-mockito .tech-logo-fallback {
-  background: #35d6a4;
-}
-
-.flow-tech.logo-docker .tech-logo-fallback,
-.flow-tech.logo-k8s .tech-logo-fallback,
-.flow-tech.logo-github .tech-logo-fallback,
-.flow-tech.logo-postgres .tech-logo-fallback,
-.flow-tech.logo-dynamo .tech-logo-fallback {
-  color: #fffdf5;
-  background: #2d7dd2;
+.logo-missing {
+  background: var(--gold);
 }
 
 .hero-portrait {
@@ -849,8 +823,8 @@ button {
   padding-top: 22px;
 }
 
-.tag-row span,
-.skill-cloud span {
+.tag-row .tech-chip,
+.skill-cloud .tech-chip {
   display: inline-flex;
   align-items: center;
   min-height: 32px;
@@ -1063,7 +1037,7 @@ button {
   background-size: 34px 34px;
 }
 
-.skill-cloud span {
+.skill-cloud .tech-chip {
   min-height: 40px;
   color: #fffdf5;
   border-color: rgba(255, 255, 255, 0.16);
