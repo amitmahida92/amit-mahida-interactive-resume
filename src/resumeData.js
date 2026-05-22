@@ -1,6 +1,6 @@
 export const profile = {
   name: "Amit Mahida",
-  role: "Frontend Architect / Full-Stack Developer",
+  role: "AI-Powered Full Stack Architect | Angular, React, Node.js, Spring Boot, AWS, Kubernetes | B2B SaaS, Microservices & Cloud-Native Systems | 12+ Years",
   location: "Vadodara, Gujarat, India",
   phone: "+91 8905721492",
   email: "amit.mahida9292@gmail.com",
@@ -9,7 +9,7 @@ export const profile = {
   pdf: `${import.meta.env.BASE_URL}Amit_Mahida_FE_Architect.pdf`,
   image: `${import.meta.env.BASE_URL}amit-mahida-profile.jpeg`,
   summary:
-    "Frontend architecture leader with deep React, Angular, Node.js, Java, AWS, and data-heavy product experience. I build scalable SaaS interfaces, schema-driven builders, and high-performing teams that ship dependable product platforms.",
+    "AI-powered full-stack architecture leader with deep React, Angular, Node.js, Spring Boot, AWS, Kubernetes, and data-heavy product experience. I build scalable SaaS interfaces, schema-driven builders, cloud-native systems, and high-performing teams that ship dependable product platforms.",
   stack: [
     "React",
     "Angular",

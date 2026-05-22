@@ -473,7 +473,7 @@ function Hero() {
         <figure className="hero-portrait" aria-label="Portrait of Amit Mahida">
           <img src={profile.image} alt="Amit Mahida" />
           <figcaption>
-            <span>Frontend Architect</span>
+            <span>AI-Powered Full Stack Architect</span>
             <strong>12+ years building SaaS products</strong>
           </figcaption>
         </figure>
