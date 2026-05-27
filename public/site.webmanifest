@@ -1,7 +1,7 @@
 {
   "name": "Amit Mahida Interactive Resume",
   "short_name": "Amit Resume",
-  "description": "Interactive resume for Amit Mahida, AI-Powered Full Stack Architect across Angular, React, Node.js, Spring Boot, AWS, Kubernetes, B2B SaaS, microservices, and cloud-native systems.",
+  "description": "Interactive resume for Amit Mahida, Senior Full Stack Architect and Frontend Architecture Leader for SaaS platform engineering.",
   "id": ".",
   "start_url": ".",
   "scope": ".",
@@ -32,7 +32,7 @@
     },
     {
       "name": "Resume PDF",
-      "url": "Amit_Mahida_FE_Architect.pdf",
+      "url": "Amit_Mahida_FullStack_Architect.pdf",
       "description": "Open the printable resume PDF."
     }
   ]

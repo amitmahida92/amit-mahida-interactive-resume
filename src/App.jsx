@@ -473,8 +473,8 @@ function Hero() {
         <figure className="hero-portrait" aria-label="Portrait of Amit Mahida">
           <img src={profile.image} alt="Amit Mahida" />
           <figcaption>
-            <span>AI-Powered Full Stack Architect</span>
-            <strong>12+ years building SaaS products</strong>
+            <span>Senior Full Stack Architect</span>
+            <strong>11+ years building SaaS platforms</strong>
           </figcaption>
         </figure>
 
@@ -662,13 +662,13 @@ function EducationAndContact() {
         <p className="section-kicker">Recruiter-ready</p>
         <h2>Available as a modern interactive resume and a printable PDF.</h2>
         <div className="closing-actions">
-          <a className="button primary" href={`${emailHref}?subject=Frontend%20Architect%20Opportunity`}>
+          <a className="button primary" href={`${emailHref}?subject=Senior%20Full%20Stack%20Architect%20Opportunity`}>
             <Mail size={18} />
             <span>Start a conversation</span>
           </a>
           <a className="button secondary" href={profile.portfolio} target="_blank" rel="noreferrer">
             <ArrowUpRight size={18} />
-            <span>Bold Profile</span>
+            <span>Portfolio</span>
           </a>
         </div>
       </div>
