@@ -32,19 +32,8 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Resolve Pages base path
-        id: pages-base
-        shell: bash
-        run: |
-          repo_name="${GITHUB_REPOSITORY#*/}"
-          if [[ "$repo_name" == *.github.io ]]; then
-            echo "base=/" >> "$GITHUB_OUTPUT"
-          else
-            echo "base=/$repo_name/" >> "$GITHUB_OUTPUT"
-          fi
-
       - name: Build
-        run: npm run build -- --base="${{ steps.pages-base.outputs.base }}"
+        run: npm run build -- --base="/"
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v4
