@@ -26,19 +26,25 @@ import {
   TestTube2,
   Workflow,
 } from "lucide-react";
-import { education, experience, metrics, platformFlow, profile, showcase, skillGroups } from "./resumeData";
+import { articles, education, experience, metrics, platformFlow, profile, showcase, skillGroups } from "./resumeData";
 import { getTechFallback, resolveTechLogo } from "./techLogos";
 
 const navItems = [
   { label: "Impact", href: "#impact" },
   { label: "Architecture", href: "#architecture" },
+  { label: "Articles", href: "#articles" },
   { label: "Experience", href: "#experience" },
   { label: "Skills", href: "#skills" },
 ];
 
 const emailHref = `mailto:${profile.email}`;
+const mediumHandle = "@amit.mahida9292";
+const mediumRefreshInterval = 30 * 60 * 1000;
+const mediumFeedUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(`https://medium.com/feed/${mediumHandle}`)}`;
+const mediumCacheKey = "amit-medium-articles";
 
 const showcaseIcons = [Layers3, Workflow, Gauge, BrainCircuit];
+const articleIcons = [Database, BrainCircuit, ServerCog, Workflow, Gauge, Layers3];
 const skillIcons = [Code2, ServerCog, Cloud, Database, HardDrive, Boxes, ShieldCheck, TestTube2, Rocket, BrainCircuit];
 const flowIcons = {
   client: Code2,
@@ -113,6 +119,134 @@ function CountUp({ value, suffix = "" }) {
       {suffix}
     </span>
   );
+}
+
+function cleanMediumUrl(value) {
+  try {
+    const url = new URL(value);
+    url.search = "";
+    url.hash = "";
+    return url.toString();
+  } catch {
+    return value;
+  }
+}
+
+function getArticleSummary(item) {
+  const html = item.description || item.content || "";
+  const document = new DOMParser().parseFromString(html, "text/html");
+  document.querySelectorAll("figure, figcaption, img, picture, source").forEach((node) => node.remove());
+  const paragraphs = [...document.querySelectorAll("p")]
+    .map((paragraph) => paragraph.textContent?.replace(/\s+/g, " ").trim())
+    .filter(Boolean);
+  const text = paragraphs[0] ?? document.body.textContent?.replace(/\s+/g, " ").trim() ?? "";
+
+  if (!text) return "A practical engineering note from Amit Mahida on frontend architecture and maintainable product development.";
+  return text.length > 180 ? `${text.slice(0, 177).trim()}...` : text;
+}
+
+function formatArticleTag(value) {
+  const acronyms = new Map([
+    ["ai", "AI"],
+    ["api", "API"],
+    ["aws", "AWS"],
+    ["css", "CSS"],
+    ["html", "HTML"],
+    ["nx", "Nx"],
+    ["pwa", "PWA"],
+    ["ui", "UI"],
+    ["ux", "UX"],
+  ]);
+
+  return value
+    .replace(/[-_]+/g, " ")
+    .replace(/\s+/g, " ")
+    .trim()
+    .split(" ")
+    .map((word) => {
+      const normalized = word.toLowerCase();
+      return acronyms.get(normalized) ?? `${normalized.charAt(0).toUpperCase()}${normalized.slice(1)}`;
+    })
+    .join(" ");
+}
+
+function getArticleTags(item) {
+  const categories = Array.isArray(item.categories) ? item.categories.filter(Boolean).map(formatArticleTag).slice(0, 3) : [];
+  if (categories.length) return categories;
+
+  const title = item.title?.toLowerCase() ?? "";
+  if (title.includes("micro")) return ["Micro Frontends", "Architecture", "Frontend"];
+  if (title.includes("nx")) return ["Angular", "Nx", "Micro Frontends"];
+  return ["Frontend", "Architecture", "Maintainability"];
+}
+
+function normalizeMediumArticle(item) {
+  const href = cleanMediumUrl(item.link || item.guid || "");
+  const published = item.pubDate ? new Date(item.pubDate) : null;
+  const date =
+    published && !Number.isNaN(published.valueOf())
+      ? new Intl.DateTimeFormat("en-US", { month: "short", day: "numeric", year: "numeric" }).format(published)
+      : "Medium";
+
+  return {
+    title: item.title,
+    publication: "Medium",
+    date,
+    href,
+    summary: getArticleSummary(item),
+    tags: getArticleTags(item),
+  };
+}
+
+function isOwnMediumArticle(item) {
+  try {
+    const url = new URL(item.link || item.guid || "");
+    return url.hostname === "medium.com" && url.pathname.startsWith(`/${mediumHandle}/`);
+  } catch {
+    return false;
+  }
+}
+
+function readCachedMediumArticles() {
+  try {
+    const cached = JSON.parse(window.localStorage.getItem(mediumCacheKey) || "null");
+    return Array.isArray(cached?.articles) && cached.articles.length ? cached.articles : articles;
+  } catch {
+    return articles;
+  }
+}
+
+function useMediumArticles() {
+  const [mediumArticles, setMediumArticles] = useState(readCachedMediumArticles);
+
+  useEffect(() => {
+    let cancelled = false;
+
+    const fetchArticles = async () => {
+      try {
+        const response = await fetch(mediumFeedUrl);
+        if (!response.ok) throw new Error(`Medium feed returned ${response.status}`);
+        const data = await response.json();
+        const fetchedArticles = (data.items ?? []).filter(isOwnMediumArticle).slice(0, 3).map(normalizeMediumArticle);
+
+        if (!fetchedArticles.length) return;
+        window.localStorage.setItem(mediumCacheKey, JSON.stringify({ articles: fetchedArticles, cachedAt: Date.now() }));
+        if (!cancelled) setMediumArticles(fetchedArticles);
+      } catch {
+        if (!cancelled) setMediumArticles(readCachedMediumArticles());
+      }
+    };
+
+    fetchArticles();
+    const interval = window.setInterval(fetchArticles, mediumRefreshInterval);
+
+    return () => {
+      cancelled = true;
+      window.clearInterval(interval);
+    };
+  }, []);
+
+  return mediumArticles;
 }
 
 function TechLogo({ logo, name }) {
@@ -557,6 +691,58 @@ function ArchitectureShowcase() {
   );
 }
 
+function Articles() {
+  const mediumArticles = useMediumArticles();
+
+  return (
+    <section id="articles" className="section articles-section">
+      <SectionHeading eyebrow="Technical writing" title="Medium articles that turn hands-on learning into reusable engineering notes">
+        Writing sharpens the same instincts I use at work: explain frontend architecture tradeoffs clearly, reduce ambiguity, and make complex systems easier for teams to reason about.
+      </SectionHeading>
+
+      <div className="articles-topline reveal">
+        <div>
+          <strong>Published on Medium</strong>
+          <span>Angular, Nx, micro-frontends, frontend architecture, and maintainable product engineering.</span>
+        </div>
+        <a className="button secondary article-profile-link" href={profile.medium} target="_blank" rel="noreferrer">
+          <ArrowUpRight size={18} />
+          <span>View Medium</span>
+        </a>
+      </div>
+
+      <div className="articles-grid">
+        {mediumArticles.map((article, index) => {
+          const Icon = articleIcons[index] ?? Layers3;
+          return (
+            <article className="article-card reveal" key={article.title} style={{ "--delay": `${index * 70}ms` }}>
+              <div className="article-card-header">
+                <span className="icon-tile">
+                  <Icon size={20} />
+                </span>
+                <span>
+                  {article.publication} - {article.date}
+                </span>
+              </div>
+              <h3>{article.title}</h3>
+              <p>{article.summary}</p>
+              <div className="tag-row">
+                {article.tags.map((tag) => (
+                  <TechChip key={tag} label={tag} />
+                ))}
+              </div>
+              <a className="article-link" href={article.href} target="_blank" rel="noreferrer">
+                <span>Read article</span>
+                <ArrowUpRight size={16} />
+              </a>
+            </article>
+          );
+        })}
+      </div>
+    </section>
+  );
+}
+
 function Experience() {
   const [activeIndex, setActiveIndex] = useState(0);
 
@@ -686,6 +872,7 @@ export default function App() {
         <Hero />
         <Impact />
         <ArchitectureShowcase />
+        <Articles />
         <Experience />
         <Skills />
         <EducationAndContact />

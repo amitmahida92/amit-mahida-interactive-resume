@@ -646,6 +646,7 @@ button {
 .hero-stat,
 .metric-card,
 .showcase-card,
+.article-card,
 .timeline-card,
 .education-card,
 .closing-panel {
@@ -678,6 +679,7 @@ button {
 }
 
 .section {
+  scroll-margin-top: 132px;
   width: min(1180px, 90vw);
   margin: 0 auto;
   padding: 78px 0;
@@ -723,7 +725,8 @@ button {
 }
 
 .metric-card:hover,
-.showcase-card:hover {
+.showcase-card:hover,
+.article-card:hover {
   transform: translateY(-5px);
   border-color: var(--line-strong);
   box-shadow: 0 28px 80px rgba(30, 28, 22, 0.2);
@@ -829,6 +832,135 @@ button {
   margin-top: 18px;
   font-size: 2rem;
   line-height: 1;
+}
+
+.articles-section {
+  width: 100%;
+  max-width: none;
+  padding-left: 5vw;
+  padding-right: 5vw;
+  color: #fffdf5;
+  background:
+    linear-gradient(135deg, rgba(34, 184, 137, 0.2), transparent 32%),
+    linear-gradient(225deg, rgba(255, 107, 74, 0.16), transparent 38%),
+    #171511;
+}
+
+.articles-section .section-heading,
+.articles-topline,
+.articles-grid {
+  width: min(1180px, 100%);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.articles-section .section-heading p:not(.section-kicker) {
+  color: rgba(255, 253, 245, 0.72);
+}
+
+.articles-topline {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  margin-bottom: 18px;
+  padding: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: var(--radius);
+  background:
+    linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    rgba(255, 255, 255, 0.07);
+  background-size: 32px 32px;
+}
+
+.articles-topline div {
+  display: grid;
+  gap: 6px;
+}
+
+.articles-topline strong {
+  font-size: 1.05rem;
+}
+
+.articles-topline span {
+  color: rgba(255, 253, 245, 0.72);
+  line-height: 1.55;
+}
+
+.article-profile-link {
+  flex: 0 0 auto;
+}
+
+.articles-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.article-card {
+  display: flex;
+  flex-direction: column;
+  min-height: 390px;
+  padding: 22px;
+  color: #fffdf5;
+  border-color: rgba(255, 255, 255, 0.14);
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.055)),
+    rgba(255, 255, 255, 0.05);
+  box-shadow: 0 22px 70px rgba(0, 0, 0, 0.22);
+  transition:
+    transform 220ms ease,
+    box-shadow 220ms ease,
+    border-color 220ms ease;
+}
+
+.article-card:hover {
+  border-color: rgba(255, 253, 245, 0.32);
+  box-shadow: 0 30px 90px rgba(0, 0, 0, 0.3);
+}
+
+.article-card-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 22px;
+  color: rgba(255, 253, 245, 0.68);
+  font-size: 0.84rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.article-card h3 {
+  margin: 0;
+  font-size: 1.26rem;
+  line-height: 1.22;
+}
+
+.article-card p {
+  margin: 14px 0 0;
+  color: rgba(255, 253, 245, 0.72);
+  line-height: 1.65;
+}
+
+.article-card .tag-row .tech-chip {
+  color: #fffdf5;
+  border-color: rgba(255, 255, 255, 0.16);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.article-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  width: fit-content;
+  margin-top: 22px;
+  color: var(--gold);
+  font-weight: 850;
+}
+
+.article-link:hover {
+  color: #fff0a1;
 }
 
 .tag-row {
@@ -1191,7 +1323,8 @@ button {
 
   .hero-stats,
   .metric-grid,
-  .showcase-grid {
+  .showcase-grid,
+  .articles-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
@@ -1217,7 +1350,7 @@ button {
 
   .nav-links {
     display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-columns: repeat(5, minmax(0, 1fr));
     gap: 2px;
     overflow: hidden;
   }
@@ -1275,15 +1408,22 @@ button {
   .hero-stats,
   .metric-grid,
   .showcase-grid,
+  .articles-grid,
   .skill-tabs {
     grid-template-columns: 1fr;
   }
 
   .section,
   .architecture-section,
+  .articles-section,
   .skills-section {
     width: 100%;
     padding: 58px 18px;
+  }
+
+  .articles-topline {
+    align-items: stretch;
+    flex-direction: column;
   }
 
   .section-heading h2,

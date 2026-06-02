@@ -5,6 +5,7 @@ export const profile = {
   phone: "+91 89057 21492",
   email: "amit.mahida9292@gmail.com",
   linkedin: "https://www.linkedin.com/in/amit-mahida",
+  medium: "https://medium.com/@amit.mahida9292",
   portfolio: "https://amitmahida.dev",
   pdf: `${import.meta.env.BASE_URL}Amit_Mahida_FullStack_Architect.pdf`,
   image: `${import.meta.env.BASE_URL}amit-mahida-profile.jpeg`,
@@ -245,6 +246,36 @@ export const showcase = [
     body:
       "Managed AWS deployments across EC2, S3, CloudFront, Route 53, Amplify, and RDS while improving scalability and serverless efficiency.",
     tags: ["AWS", "CloudFront", "Route 53", "CI/CD"],
+  },
+];
+
+export const articles = [
+  {
+    title: "From Nx Monolith to Micro-Frontends: A Real Migration Story",
+    publication: "Medium",
+    date: "May 2026",
+    href: "https://medium.com/@amit.mahida9292/from-nx-monolith-to-micro-frontends-in-angular-21-the-migration-story-i-wish-i-had-read-first-fff5357668be",
+    summary:
+      "Walks through an Angular 21 migration story by comparing an Nx monolith with a micro-frontend architecture for ERP and CRM product surfaces.",
+    tags: ["Angular", "Nx", "Micro Frontends"],
+  },
+  {
+    title: "Microservices vs Micro Frontends: The Great Architecture Split from Backend to Browser",
+    publication: "Medium",
+    date: "May 25, 2026",
+    href: "https://medium.com/@amit.mahida9292/microservices-vs-micro-frontends-the-great-architecture-split-from-backend-to-browser-561547330723",
+    summary:
+      "Explains how distributed architecture patterns moved from backend services into browser applications, including diagrams, tradeoffs, and engineering lessons.",
+    tags: ["Microservices", "Micro Frontends", "Architecture"],
+  },
+  {
+    title: "Frontend Anti-Patterns: The Small Decisions That Make Apps Hard to Use, Test, and Maintain",
+    publication: "Medium",
+    date: "May 22, 2026",
+    href: "https://medium.com/@amit.mahida9292/frontend-anti-patterns-the-small-decisions-that-make-apps-hard-to-use-test-and-maintain-6e2b3bd75fcc",
+    summary:
+      "Highlights everyday frontend decisions that quietly damage usability, testability, maintainability, and long-term product quality.",
+    tags: ["Frontend", "Testing", "Maintainability"],
   },
 ];
 
