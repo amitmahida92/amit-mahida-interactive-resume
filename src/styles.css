@@ -97,10 +97,17 @@ button {
   place-items: center;
   width: 38px;
   height: 38px;
+  overflow: hidden;
   border: 1px solid rgba(255, 255, 255, 0.28);
   border-radius: var(--radius);
-  color: var(--ink);
-  background: linear-gradient(135deg, var(--gold), #fff5c8 48%, var(--mint));
+  background: #141313;
+  box-shadow: 0 0 0 2px rgba(242, 178, 51, 0.14);
+}
+
+.brand-mark img {
+  display: block;
+  width: 100%;
+  height: 100%;
 }
 
 .nav-links {

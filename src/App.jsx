@@ -38,6 +38,7 @@ const navItems = [
 ];
 
 const emailHref = `mailto:${profile.email}`;
+const brandIconSrc = `${import.meta.env.BASE_URL}favicon.svg`;
 const mediumHandle = "@amit.mahida9292";
 const mediumRefreshInterval = 30 * 60 * 1000;
 const mediumFeedUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(`https://medium.com/feed/${mediumHandle}`)}`;
@@ -536,7 +537,9 @@ function Header() {
   return (
     <header className="site-header">
       <a className="brand" href="#top" aria-label="Amit Mahida home">
-        <span className="brand-mark">AM</span>
+        <span className="brand-mark" aria-hidden="true">
+          <img src={brandIconSrc} alt="" />
+        </span>
         <span>Amit Mahida</span>
       </a>
       <nav className="nav-links" aria-label="Resume sections">

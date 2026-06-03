@@ -1,15 +1,24 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Amit Mahida">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Amit Mahida tech architect icon">
   <defs>
-    <linearGradient id="mark" x1="16" x2="112" y1="16" y2="112" gradientUnits="userSpaceOnUse">
+    <linearGradient id="shell" x1="14" x2="114" y1="12" y2="116" gradientUnits="userSpaceOnUse">
       <stop stop-color="#f2b233" />
-      <stop offset="0.52" stop-color="#fff0a1" />
+      <stop offset="0.48" stop-color="#ff6b4a" />
       <stop offset="1" stop-color="#22b889" />
     </linearGradient>
+    <linearGradient id="screen" x1="30" x2="98" y1="34" y2="88" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#fffdf5" />
+      <stop offset="1" stop-color="#d7fff0" />
+    </linearGradient>
   </defs>
-  <rect width="128" height="128" rx="22" fill="#16140f" />
-  <rect x="12" y="12" width="104" height="104" rx="18" fill="url(#mark)" />
-  <path
-    fill="#141313"
-    d="M33.8 88 50.6 40h11.2l16.8 48H67.4l-3.2-10.2H48.1L44.9 88H33.8Zm16.9-18.9h11l-5.5-17.6-5.5 17.6ZM82.4 88V40h10.5v48H82.4Z"
-  />
+  <rect width="128" height="128" rx="26" fill="#141313" />
+  <rect x="11" y="11" width="106" height="106" rx="22" fill="url(#shell)" />
+  <rect x="20" y="22" width="88" height="72" rx="13" fill="#141313" />
+  <rect x="28" y="31" width="72" height="48" rx="8" fill="url(#screen)" />
+  <path d="M48 49 38 56l10 7M80 49l10 7-10 7" fill="none" stroke="#141313" stroke-linecap="round" stroke-linejoin="round" stroke-width="7" />
+  <path d="m69 43-10 26" fill="none" stroke="#22b889" stroke-linecap="round" stroke-width="7" />
+  <path d="M44 95h40l6 13H38l6-13Z" fill="#141313" />
+  <path d="M24 39h-7M111 39h-7M24 64h-7M111 64h-7M35 18v-7M64 18v-7M93 18v-7" stroke="#fffdf5" stroke-linecap="round" stroke-width="5" opacity="0.92" />
+  <circle cx="17" cy="39" r="4" fill="#fffdf5" />
+  <circle cx="111" cy="64" r="4" fill="#fffdf5" />
+  <circle cx="64" cy="11" r="4" fill="#fffdf5" />
 </svg>
