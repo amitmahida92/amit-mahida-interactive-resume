@@ -611,7 +611,7 @@ function Hero() {
           <img src={profile.image} alt="Amit Mahida" />
           <figcaption>
             <span>Senior Full Stack Architect</span>
-            <strong>11+ years building SaaS platforms</strong>
+            <strong>11+ years</strong>
           </figcaption>
         </figure>
 

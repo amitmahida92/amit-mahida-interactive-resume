@@ -7,7 +7,7 @@ export const profile = {
   linkedin: "https://www.linkedin.com/in/amit-mahida",
   medium: "https://medium.com/@amit.mahida9292",
   portfolio: "https://amitmahida.dev",
-  pdf: `${import.meta.env.BASE_URL}Amit_Mahida_FullStack_Architect.pdf`,
+  pdf: `${import.meta.env.BASE_URL}Amit_Mahida_Updated_Resume.pdf`,
   image: `${import.meta.env.BASE_URL}amit-mahida-profile.jpeg`,
   summary:
     "Senior Full Stack Architect and Engineering Leader with 11+ years designing, modernizing, and delivering enterprise web applications, multi-tenant SaaS platforms, and scalable frontend/backend systems. I own architecture decisions, lead engineering teams, improve scalability, mentor developers, and partner with product, UX, backend, and customer stakeholders to deliver business-critical platforms.",
@@ -210,7 +210,7 @@ export const metrics = [
     value: 4,
     suffix: "x",
     label: "Faster large-list UX",
-    detail: "Task views supporting 3K+ records improved responsiveness by approximately 2-4x.",
+    detail: "3K+ production records; performance-tested to 10K+ tasks.",
   },
 ];
 
@@ -236,7 +236,7 @@ export const showcase = [
     eyebrow: "Data at speed",
     stat: "2-4x faster",
     body:
-      "Optimized 3K+ record task views with virtual scrolling, viewport rendering, DOM optimization, state decoupling, and tuned NgRx selectors.",
+      "3K+ production records; performance-tested to 10K+ tasks.",
     tags: ["Virtual Scrolling", "NgRx", "Performance", "Caching"],
   },
   {
@@ -281,17 +281,29 @@ export const articles = [
 
 export const experience = [
   {
-    role: "SDE 3 / Senior Full Stack Architect",
+    role: "Director & CTO",
+    company: "WebStack Labs",
+    place: "Vadodara, India",
+    period: "21 June 2021 - Present",
+    accent: "blue",
+    highlights: [
+      "WebStack Labs is my registered Indian company and legal contracting entity.",
+      "Principal Software Engineer, It's All Savvy UK (via WebStack Labs), 1 July 2026 - Present.",
+      "Lead end-to-end product engineering across architecture, frontend, backend, integrations, cloud operations, quality, and stakeholder collaboration.",
+    ],
+  },
+  {
+    role: "SDE 3 - Product",
     company: "Rishabh Software",
     place: "Vadodara, India",
-    period: "February 2025 - Present",
+    period: "February 2025 - 15 May 2026",
     accent: "mint",
     highlights: [
       "Own frontend architecture and delivery for a multi-tenant SaaS platform serving 100+ tenants across Task Management, Dashboards, Collaboration, Analytics, Workflow Automation, Timeline, and Gantt modules.",
       "Architected an Nx monorepo with 12+ shared UI libraries and reusable components, reducing duplicate implementation and accelerating feature delivery across product modules.",
       "Designed a schema-driven drag-and-drop Workflow Automation Builder using Trigger-Condition-Action patterns, enabling new automation types through configuration-first development and reducing implementation effort by approximately 60-80%.",
       "Built dynamic forms, reusable configurators, and reliable schema serialization/deserialization workflows, improving automation publishing accuracy and reducing workflow configuration issues.",
-      "Optimized data-heavy task views supporting 3K+ records per list through virtual scrolling, viewport-based rendering, DOM optimization, and state decoupling, improving large-list responsiveness by approximately 2-4x.",
+      "3K+ production records; performance-tested to 10K+ tasks.",
       "Improved asset-heavy screen performance through image caching and optimization strategies, reducing perceived load time for repeated navigation by approximately 30-50%.",
       "Tuned NgRx state management through selector optimization, state normalization, and reduced rerender patterns, improving dashboard and board stability under heavy data loads.",
       "Integrated Java REST APIs through Swagger/OpenAPI contracts, supported PostgreSQL-backed reporting/filtering flows, and implemented Mixpanel instrumentation for product analytics and funnel visibility.",
@@ -300,8 +312,8 @@ export const experience = [
   {
     role: "Technical Lead",
     company: "Innovecture",
-    place: "Remote",
-    period: "August 2024 - January 2025",
+    place: "Remote from Vadodara, India",
+    period: "August 2024 - February 2025",
     accent: "coral",
     highlights: [
       "Led technical delivery for Angular, React, Node.js, and AWS-based application initiatives, balancing feature delivery, infrastructure improvements, and scalability goals.",
@@ -318,10 +330,10 @@ export const experience = [
     ],
   },
   {
-    role: "Frontend Development Head",
+    role: "Full Stack Developer",
     company: "It's All Savvy",
-    place: "London, United Kingdom / Remote",
-    period: "September 2021 - July 2024",
+    place: "London, UK / Remote",
+    period: "September 2021 - 30 June 2024",
     accent: "violet",
     highlights: [
       "Led frontend engineering for product-facing web applications, partnering with product managers, UX/UI designers, and backend teams across Scrum and Kanban delivery models.",
@@ -366,7 +378,7 @@ export const experience = [
     role: "Software Engineer",
     company: "Rishabh Software",
     place: "Vadodara, India",
-    period: "January 2015 - March 2019",
+    period: "May 2016 - March 2019",
     accent: "mint",
     highlights: [
       "Built and enhanced enterprise business applications with internationalization support, modern UI improvements, comprehensive testing, and code coverage practices.",
@@ -374,6 +386,22 @@ export const experience = [
       "Strengthened team and stakeholder communication through regular updates, documentation, Jira, and Confluence, reducing delivery errors by approximately 20%.",
       "Analyzed user feedback and market trends to inform feature improvements, increasing user satisfaction by approximately 15%.",
     ],
+  },
+  {
+    role: "Trainee",
+    company: "Rishabh Software",
+    place: "Vadodara, India",
+    period: "15 May 2015 - May 2016",
+    accent: "coral",
+    highlights: ["Trainee at Rishabh Software, 15 May 2015 - May 2016."],
+  },
+  {
+    role: "Intern",
+    company: "Rishabh Software",
+    place: "Vadodara, India",
+    period: "15 December 2014 - 8 May 2015",
+    accent: "violet",
+    highlights: ["Intern at Rishabh Software, 15 December 2014 - 8 May 2015."],
   },
 ];
 

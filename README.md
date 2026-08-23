@@ -8,7 +8,7 @@ Modern React resume experience for Amit Mahida, built from the latest full-stack
 - Repository: `amit-mahida-interactive-resume`
 - Live site: `https://amitmahida.dev`
 - GitHub Pages fallback: `https://amitmahida92.github.io/amit-mahida-interactive-resume/`
-- Resume PDF: `public/Amit_Mahida_FullStack_Architect.pdf`
+- Resume PDF: `public/Amit_Mahida_Updated_Resume.pdf`
 
 ## Run Locally
 

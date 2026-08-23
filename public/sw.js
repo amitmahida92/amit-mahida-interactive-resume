@@ -1,8 +1,8 @@
-const CACHE_NAME = "amit-mahida-resume-2026-05-27";
+const CACHE_NAME = "amit-mahida-resume-2026-08-23";
 const CORE_ASSETS = [
   "./",
   "./index.html",
-  "./Amit_Mahida_FullStack_Architect.pdf",
+  "./Amit_Mahida_Updated_Resume.pdf",
   "./amit-mahida-profile.jpeg",
   "./favicon.svg",
   "./pwa-icon-192.png",
